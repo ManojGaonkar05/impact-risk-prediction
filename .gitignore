@@ -1,0 +1,8 @@
+.env
+api key.txt
+chat_prompt.txt
+venv/
+__pycache__/
+*.pyc
+debug/
+.vscode/
