@@ -23,7 +23,7 @@ Real runs of the Planning + Coding workflow (data/run_log_sample.jsonl):
 
 | Run | Status  | Duration | Retries | Tokens / est. cost                     | Notes                                  |
 |-----|---------|----------|---------|----------------------------------------|----------------------------------------|
-| 1   | failure | 639.0 s  | 3       | not logged                             | retry limit reached; error text: (add from log) |
+| 1   | failure | 639.0 s  | 3       | not logged                             | retry limit reached; generic API error ("An unexpected error occurred... contact support"), output_chars 0 |
 | 2   | success | 584.9 s  | 2       | not logged                             | Gemini 503 high-demand errors, then OK |
 | 3   | success | 302.3 s  | 1       | 2127 tokens (885 in, 1242 out), est. $0.005321 | first run with token/cost logging |
 
