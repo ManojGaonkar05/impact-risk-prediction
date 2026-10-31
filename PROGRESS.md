@@ -12,6 +12,7 @@ Next milestone: Capstone Review 2 on 3 Nov 2026
 | 5  | Common adapter schema                         | Done      | schema.py: telemetry record, adapter interface, evolution change, outcome labels. Change/outcome classes are defined only; no labeled data yet |
 | 6  | Save token and cost in telemetry log          | Done      | difference of EvoAgentX cost_manager totals before/after a run; whole run including retries; cost is an estimate |
 | 7  | Feature extraction + demo script              | Prototype | features.py and demo.py; descriptive features only, no prediction |
+| 7b | Decision output skeleton                      | Prototype | decision.py: rule-based ACCEPT/MODIFY/REJECT, placeholder thresholds, hypothetical inputs only |
 | 8  | README and docs (architecture, requirements)  | Done      | README.md, docs/architecture.md, docs/requirements.md (drafts) |
 | 9  | Literature survey                             | To do     | 4 papers shortlisted; verify authors/venue/year from the papers |
 | 10 | Review 2 PPT                                  | To do     | due 3 Nov 2026                                               |

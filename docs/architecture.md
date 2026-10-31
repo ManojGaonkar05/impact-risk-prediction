@@ -18,7 +18,8 @@
  ML prediction                      [Planned]    Impact: Quality, Cost, Latency, Reliability
                                                  Risk:   Regression, Failure, Cascade, Safety drift
         v
- Decision engine                    [Planned]    ACCEPT / MODIFY / REJECT + reason + mitigation
+ Decision engine                    [Prototype]  decision.py: rule-based skeleton, placeholder thresholds;
+                                                 final version needs the prediction models
         v
  Dashboard -> Controlled validation -> Feedback   [Planned]  predicted vs actual
 ```

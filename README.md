@@ -20,17 +20,18 @@ A Common Adapter Interface keeps the core framework-independent. EvoAgentX is th
 | Feature extraction (`features.py`) | Prototype |
 | Evolution dataset (change -> effect) | Planned |
 | Impact / risk prediction models | Planned |
-| Decision engine (ACCEPT / MODIFY / REJECT) | Planned |
+| Decision engine (ACCEPT / MODIFY / REJECT) | Prototype: rule-based skeleton with placeholder thresholds, demoed on hypothetical inputs; no prediction model behind it |
 | Dashboard, controlled validation, feedback | Planned |
 
 Data so far: 3 real runs (1 failure, 2 successes). This is far too small for any statistical claim.
 Only run 3 has token and cost numbers (logging was added after runs 1 and 2).
-Cost is an estimate computed by EvoAgentX. No predictions or trained models exist yet.
+Cost is an estimate computed by EvoAgentX. No predictions or trained models exist yet; the decision demo uses hypothetical inputs.
 
 ## Files
 
 - `schema.py` - common representation: `TelemetryRecord`, `EvolutionChange`, `OutcomeLabel`, `Decision`, `CommonAdapter`, `EvoAgentXAdapter`
 - `features.py` - prototype feature extraction on the common representation
+- `decision.py` - rule-based ACCEPT / MODIFY / REJECT skeleton (placeholder thresholds, not calibrated)
 - `demo.py` - end-to-end demo of everything implemented so far
 - `run_logger.py` - runs the workflow N times and logs one JSON line per run
 - `sequential_workflow_gemini.py` - 2-agent (Planning, Coding) EvoAgentX workflow on Gemini

@@ -6,6 +6,7 @@ demo.py - end-to-end demo of what is implemented so far.
 
 Stages shown:  log file -> Common Adapter -> common records -> validation
                -> prototype features -> summary -> (illustrative) evolution change
+               -> (hypothetical) ACCEPT / MODIFY / REJECT output format
 Everything is read-only except data/run_features.csv, which is regenerated.
 """
 
@@ -16,6 +17,7 @@ from dataclasses import asdict
 
 from schema import EvolutionChange, load_jsonl
 from features import run_features, summarize
+from decision import decide
 
 
 def title(text):
@@ -66,14 +68,35 @@ def main():
     )
     print(json.dumps(asdict(ex), indent=2))
 
-    title("6. Pipeline status")
+    title("6. Decision output PROTOTYPE (rule-based skeleton, HYPOTHETICAL inputs)")
+    print("These inputs are made up to show the output format. They are NOT predicted")
+    print("from data: no prediction model or evolution dataset exists yet.")
+    print("Thresholds are placeholders (cost <= +20%, latency <= +25%).\n")
+    no_risk = {"regression": False, "failure": False, "cascade": False, "safety_drift": False}
+    cases = [
+        ("Case A", "small safe change",
+         {"quality_delta": 0.02, "cost_delta_pct": 5, "latency_delta_pct": 8, "reliability_delta": 0.0}, no_risk),
+        ("Case B", "quality +8% but cost +22%",
+         {"quality_delta": 0.08, "cost_delta_pct": 22, "latency_delta_pct": 10, "reliability_delta": 0.0}, no_risk),
+        ("Case C", "quality +8%, cost +22%, weaker safety",
+         {"quality_delta": 0.08, "cost_delta_pct": 22, "latency_delta_pct": 10, "reliability_delta": 0.0},
+         dict(no_risk, safety_drift=True)),
+    ]
+    for name, label, impact, risks in cases:
+        d = decide(impact, risks)
+        print(f"{name} ({label}) [HYPOTHETICAL]")
+        print(f"  decision  : {d.decision}")
+        print(f"  reason    : {d.reason}")
+        print(f"  mitigation: {d.mitigation}\n")
+
+    title("7. Pipeline status")
     status = [
         ("Run logger + telemetry (tokens, est. cost)", "DONE"),
         ("Common Adapter Interface + schema", "DONE"),
         ("Feature extraction", "PROTOTYPE"),
         ("Evolution dataset (change -> effect)", "PLANNED"),
         ("Impact / risk prediction models", "PLANNED"),
-        ("Decision engine ACCEPT / MODIFY / REJECT", "PLANNED"),
+        ("Decision engine ACCEPT / MODIFY / REJECT (rule-based skeleton, no model)", "PROTOTYPE"),
         ("Dashboard, controlled validation, feedback", "PLANNED"),
     ]
     for name, st in status:
