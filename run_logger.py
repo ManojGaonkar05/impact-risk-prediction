@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 from evoagentx.workflow import SequentialWorkFlowGraph, WorkFlow
 from evoagentx.agents import AgentManager
 from evoagentx.models import LiteLLMConfig, LiteLLM
+from evoagentx.models.model_utils import cost_manager
+
 
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -60,6 +62,9 @@ def build_workflow():
 def run_once(run_id):
     """Run the workflow once (with retries) and return a telemetry record."""
     start = time.time()
+    in_before = sum(cost_manager.input_tokens.values())
+    out_before = sum(cost_manager.output_tokens.values())
+    cost_before = cost_manager.get_total_cost()
     retries = 0
     status = "failure"
     error = None
@@ -93,6 +98,10 @@ def run_once(run_id):
         "retries": retries,
         "error": error,
         "output_chars": output_chars,
+        "prompt_tokens": sum(cost_manager.input_tokens.values()) - in_before,
+        "completion_tokens": sum(cost_manager.output_tokens.values()) - out_before,
+        "total_tokens": cost_manager.total_llm_tokens - (in_before + out_before),
+        "cost_usd": round(cost_manager.get_total_cost() - cost_before, 6),
     }
 
 
