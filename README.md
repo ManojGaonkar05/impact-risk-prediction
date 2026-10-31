@@ -1,4 +1,3 @@
-@'
 # Pre-Commitment Impact & Risk Prediction for Self-Evolving Multi-Agent Workflows
 
 Capstone project (PW_25_VSH_01). A pre-commitment layer that predicts the impact
@@ -21,4 +20,3 @@ ACCEPT / MODIFY / REJECT. EvoAgentX is the first system under test.
 python run_logger.py 2
 
 See PROGRESS.md for status.
-'@ | Set-Content README.md
